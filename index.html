@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>LPAD+ — supplementary visualizations</title>
+  <meta name="description" content="Supplementary visualizations for lightweight proactive anomaly detection on mobile robots.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,650&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="mark" href="#top">LPAD+</a>
+    <nav>
+      <a href="#results">Results</a>
+      <a href="#figures">Figures</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <p class="kicker">Supplementary visualizations</p>
+      <h1>Lightweight proactive anomaly detection for mobile robots</h1>
+      <p class="lede">
+        A small network watches a sliding window of onboard sensors, learns what normal driving looks like,
+        and raises an alert when reconstruction, short-horizon prediction, and traversability disagree with that normal.
+        The page collects the figures used for talks and for the paper supplement.
+      </p>
+    </section>
+
+    <section class="facts" aria-label="Held-out summary">
+      <article>
+        <p class="fact-value">0.899</p>
+        <p class="fact-label">AUROC</p>
+      </article>
+      <article>
+        <p class="fact-value">0.828</p>
+        <p class="fact-label">Best F1</p>
+      </article>
+      <article>
+        <p class="fact-value">1.4%</p>
+        <p class="fact-label">False positive rate</p>
+      </article>
+      <article>
+        <p class="fact-value">1.20 ms</p>
+        <p class="fact-label">CPU, one window</p>
+      </article>
+    </section>
+
+    <section id="results" class="panel">
+      <div class="panel-head">
+        <h2>Held-out comparison</h2>
+        <p>Gazebo hospital corpus, cycle-held-out test, seed 42, 11,793 windows. F1 is the best F1 on that test set. The model is trained only on normal driving.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <caption>Scalar ranking and detection on the same held-out split.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Method</th>
+              <th scope="col">AUROC</th>
+              <th scope="col">AUPRC</th>
+              <th scope="col">Best F1</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Isolation Forest</th>
+              <td>0.762</td>
+              <td>0.717</td>
+              <td>0.624</td>
+            </tr>
+            <tr>
+              <th scope="row">One-Class SVM</th>
+              <td>0.868</td>
+              <td>0.858</td>
+              <td>0.797</td>
+            </tr>
+            <tr>
+              <th scope="row">LSTM autoencoder</th>
+              <td>0.872</td>
+              <td>0.859</td>
+              <td>0.809</td>
+            </tr>
+            <tr>
+              <th scope="row">USAD</th>
+              <td>0.875</td>
+              <td>0.856</td>
+              <td>0.797</td>
+            </tr>
+            <tr class="emphasis">
+              <th scope="row">LPAD+</th>
+              <td>0.899</td>
+              <td>0.890</td>
+              <td>0.828</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">
+        Detection delay in the manuscript is counted after fault onset, at a threshold frozen from normal validation.
+        The timing number is one window on CPU. It is not an onboard Jetson measurement.
+      </p>
+    </section>
+
+    <section id="figures" class="panel">
+      <div class="panel-head">
+        <h2>Figures</h2>
+        <p>Select a group, then open a figure for the full image. Shaded fault bands in the slip plot are labels, not detector decisions.</p>
+      </div>
+      <div class="filters" id="filters" role="tablist" aria-label="Figure groups"></div>
+      <div class="gallery" id="gallery"></div>
+      <p class="status" id="status" hidden></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Supplementary page for figures and held-out numbers. Author information is omitted on purpose.</p>
+  </footer>
+
+  <dialog id="lightbox">
+    <form method="dialog">
+      <button class="close" value="close">Close</button>
+    </form>
+    <div id="lightbox-stage"></div>
+    <p id="lightbox-caption"></p>
+  </dialog>
+
+  <script src="site.js"></script>
+</body>
+</html>

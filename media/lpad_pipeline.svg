@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 520">
+  <title>LPAD+ Pipeline Overview</title>
+  <desc>Simplified sensor-to-alert pipeline for LPAD+ three-head anomaly detection</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#eef2ff"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#c2410c"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#b91c1c"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect width="920" height="520" rx="16" fill="url(#bg)"/>
+
+  <text x="30" y="38" fill="#0f172a" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">LPAD+ Pipeline (Simplified)</text>
+  <text x="30" y="58" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="13">Sensor-only inference | ~50K params | under 3 ms CPU | 10 Hz</text>
+
+  <rect x="30" y="90" width="120" height="72" rx="10" fill="url(#blue)" stroke="#1e40af" stroke-width="1.5"/>
+  <text x="90" y="118" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" text-anchor="middle">Sensors</text>
+  <text x="90" y="136" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle">IMU, Odom, Motor</text>
+  <text x="90" y="151" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle">LiDAR (13-D)</text>
+
+  <line x1="150" y1="126" x2="178" y2="126" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="180" y="90" width="130" height="72" rx="10" fill="url(#blue)" stroke="#1e40af" stroke-width="1.5"/>
+  <text x="245" y="118" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" text-anchor="middle">Sliding Window</text>
+  <text x="245" y="136" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle">T = 30 steps</text>
+  <text x="245" y="151" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle">X in R^(30x13)</text>
+
+  <line x1="310" y1="126" x2="338" y2="126" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="340" y="90" width="120" height="72" rx="10" fill="url(#green)" stroke="#065f46" stroke-width="1.5"/>
+  <text x="400" y="118" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" text-anchor="middle">1D-CNN</text>
+  <text x="400" y="136" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle">Conv 13-32-32</text>
+  <text x="400" y="151" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle">ReLU</text>
+
+  <line x1="460" y1="126" x2="488" y2="126" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="490" y="90" width="110" height="72" rx="10" fill="url(#green)" stroke="#065f46" stroke-width="1.5"/>
+  <text x="545" y="118" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" text-anchor="middle">GRU</text>
+  <text x="545" y="136" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle">hidden = 64</text>
+  <text x="545" y="151" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle">h_T in R^64</text>
+
+  <line x1="600" y1="126" x2="640" y2="126" stroke="#475569" stroke-width="2"/>
+  <line x1="640" y1="126" x2="640" y2="200" stroke="#475569" stroke-width="2"/>
+  <line x1="640" y1="200" x2="170" y2="200" stroke="#475569" stroke-width="2"/>
+  <line x1="170" y1="200" x2="170" y2="228" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="640" y1="200" x2="400" y2="200" stroke="#475569" stroke-width="2"/>
+  <line x1="400" y1="200" x2="400" y2="228" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="640" y1="200" x2="630" y2="200" stroke="#475569" stroke-width="2"/>
+  <line x1="630" y1="200" x2="630" y2="228" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="90" y="230" width="160" height="78" rx="10" fill="url(#purple)" stroke="#5b21b6" stroke-width="1.5"/>
+  <text x="170" y="258" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" text-anchor="middle">Reconstruction</text>
+  <text x="170" y="276" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle">X_hat replay window</text>
+  <text x="170" y="292" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle">MSE(X, X_hat)</text>
+
+  <rect x="320" y="230" width="160" height="78" rx="10" fill="url(#purple)" stroke="#5b21b6" stroke-width="1.5"/>
+  <text x="400" y="258" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" text-anchor="middle">Prediction</text>
+  <text x="400" y="276" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle">X_future (N steps)</text>
+  <text x="400" y="292" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle">MSE future error</text>
+
+  <rect x="550" y="230" width="160" height="78" rx="10" fill="url(#purple)" stroke="#5b21b6" stroke-width="1.5"/>
+  <text x="630" y="258" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" text-anchor="middle">Traversability</text>
+  <text x="630" y="276" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle">tau_s in [0, 1]</text>
+  <text x="630" y="292" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle">(1 - tau_s) term</text>
+
+  <line x1="170" y1="308" x2="170" y2="350" stroke="#475569" stroke-width="2"/>
+  <line x1="400" y1="308" x2="400" y2="350" stroke="#475569" stroke-width="2"/>
+  <line x1="630" y1="308" x2="630" y2="350" stroke="#475569" stroke-width="2"/>
+  <line x1="170" y1="350" x2="630" y2="350" stroke="#475569" stroke-width="2"/>
+  <line x1="400" y1="350" x2="400" y2="378" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="300" y="380" width="200" height="64" rx="10" fill="url(#orange)" stroke="#9a3412" stroke-width="1.5"/>
+  <text x="400" y="406" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" text-anchor="middle">Combined Score</text>
+  <text x="400" y="424" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle">S(X) = L1*recon + L2*pred + L3*(1-tau_s)</text>
+
+  <line x1="400" y1="444" x2="400" y2="468" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="330" y="470" width="140" height="36" rx="18" fill="url(#red)" stroke="#991b1b" stroke-width="1.5"/>
+  <text x="400" y="493" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" text-anchor="middle">Alert if S &gt;= theta</text>
+
+  <rect x="730" y="90" width="160" height="110" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="810" y="114" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="600" text-anchor="middle">Simulations</text>
+  <text x="810" y="132" fill="#64748b" font-family="Arial, Helvetica, sans-serif" font-size="10" text-anchor="middle">Gazebo + Isaac Sim</text>
+  <text x="810" y="148" fill="#64748b" font-family="Arial, Helvetica, sans-serif" font-size="10" text-anchor="middle">Hospital, Forest</text>
+  <text x="810" y="164" fill="#64748b" font-family="Arial, Helvetica, sans-serif" font-size="10" text-anchor="middle">Urban, Warehouse</text>
+  <text x="810" y="184" fill="#64748b" font-family="Arial, Helvetica, sans-serif" font-size="10" text-anchor="middle">ROS 2 Humble to CSV</text>
+
+  <rect x="730" y="230" width="160" height="92" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="810" y="254" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="600" text-anchor="middle">Training</text>
+  <text x="810" y="272" fill="#64748b" font-family="Arial, Helvetica, sans-serif" font-size="10" text-anchor="middle">Normal data only</text>
+  <text x="810" y="288" fill="#64748b" font-family="Arial, Helvetica, sans-serif" font-size="10" text-anchor="middle">Adam, lr=1e-3, 80 ep</text>
+  <text x="810" y="304" fill="#64748b" font-family="Arial, Helvetica, sans-serif" font-size="10" text-anchor="middle">theta = 95th percentile</text>
+
+  <rect x="30" y="380" width="240" height="126" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="150" y="404" fill="#334155" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="600" text-anchor="middle">Risk Amplifier</text>
+  <text x="150" y="424" fill="#1e293b" font-family="Courier New, monospace" font-size="11" text-anchor="middle">tau_s &gt;= 0.3 -&gt; N = 10</text>
+  <text x="150" y="442" fill="#1e293b" font-family="Courier New, monospace" font-size="11" text-anchor="middle">tau_s &lt; 0.3 -&gt; N = 40</text>
+  <text x="150" y="466" fill="#64748b" font-family="Arial, Helvetica, sans-serif" font-size="10" text-anchor="middle">Extended horizon when</text>
+  <text x="150" y="482" fill="#64748b" font-family="Arial, Helvetica, sans-serif" font-size="10" text-anchor="middle">terrain is hazardous</text>
+</svg>

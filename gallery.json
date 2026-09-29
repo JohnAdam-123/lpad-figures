@@ -1,0 +1,52 @@
+{
+  "groups": [
+    { "id": "method", "label": "Method" },
+    { "id": "locomotion", "label": "Wheel slip" },
+    { "id": "hardware", "label": "Measured current" },
+    { "id": "platform", "label": "Platform" }
+  ],
+  "items": [
+    {
+      "src": "media/lpad_pipeline.svg",
+      "kind": "image",
+      "group": "method",
+      "title": "Inference path",
+      "caption": "A short window of proprioceptive sensors passes through a small temporal network with reconstruction, prediction, and traversability heads. Those three outputs become one score. An alert fires when the score crosses a threshold fit on normal validation data."
+    },
+    {
+      "src": "media/wheel_slip_signature.png",
+      "kind": "image",
+      "group": "locomotion",
+      "title": "Labeled wheel slip",
+      "caption": "Gazebo run. Forward speed falls to about zero while the wheels keep turning. The shaded band is the slip annotation, not the detector output."
+    },
+    {
+      "src": "media/nexus_vs_proxy_timeseries.png",
+      "kind": "image",
+      "group": "hardware",
+      "title": "Proxy and measured current",
+      "caption": "Gray is the Gazebo motor-current proxy. Color is current measured on the real platform. The traces are placed on one time axis for shape comparison. They are not a claim that the proxy equals measured amperes, and they are not a lockstep recording of one shared experiment."
+    },
+    {
+      "src": "media/motor_distributions.png",
+      "kind": "image",
+      "group": "hardware",
+      "title": "Current distributions",
+      "caption": "Train-set histograms. Measured current sits near zero with a short tail. The Gazebo proxy spreads over a wider range. The two sources do not share the same distribution."
+    },
+    {
+      "src": "media/nexus_proxy_correlation.png",
+      "kind": "image",
+      "group": "hardware",
+      "title": "What lines up with what",
+      "caption": "Pairwise correlations. Measured left and right currents move together. The Gazebo proxies line up with wheel speed and yaw rate, and they do not match the measured current channels."
+    },
+    {
+      "src": "media/platform_components.png",
+      "kind": "image",
+      "group": "platform",
+      "title": "Sensing platform",
+      "caption": "Differential-drive platform used to log measured motor current together with wheel speed and position. Callouts mark the sensors on the robot."
+    }
+  ]
+}
